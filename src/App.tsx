@@ -1,25 +1,49 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Sidemenu from './components/Sidemenu';
+
+const items = [
+  {
+     "data":[
+        {
+           "name":"Some node 1",
+           "children":[
+              {
+                 "name":"Some node 1.1",
+                 "children":[
+                    {
+                       "name":"Some node 1.1.1"
+                    }
+                 ]
+              },
+              {
+                 "name":"Some node 1.2"
+              },
+              {
+                 "name":"Some node 1.3",
+                 "children":[
+                    {
+                       "name":"Some node 1.3.1"
+                    }
+                 ]
+              },
+              {
+                 "name":"Some node 1.4"
+              }
+           ]
+        },
+        {
+           "name":"Some node 2"
+        }
+     ]
+  }
+  ]
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Sidemenu items={items[0]}></Sidemenu>
+    </>
   );
 }
 
