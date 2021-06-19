@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 import './App.css';
-import Sidemenu from './components/Sidemenu';
+import Sidemenu, { SidemenuProps } from './components/Sidemenu';
+import { SidemenuItem } from './models/SidemenuItem';
 
-const items = [
+export const dataObjects = [
   {
      "data":[
         {
@@ -39,10 +41,28 @@ const items = [
   }
   ]
 
+
 function App() {
+
+  const API_URL = "https://run.mocky.io/v3/624b1431-6ef2-4899-8597-a8036477da73"
+  const [data, setdata] = useState("")
+  const loadData = async() => {
+    const result = await (await fetch(API_URL)).json()
+    setdata(result);
+    console.log(result)
+  }
+  // Försökte separera "data" ifrån arrayen med objekten.
+  useEffect(() => {
+
+  });
+
+  // Här gör jag en fullösning, eftersom Rad 9 har en wrapper object "data" så vet jag inte
+  // hur interfacet ska hantera strukturen.
+  const items: SidemenuItem[] = dataObjects[0].data;
+
   return (
     <>
-    <Sidemenu items={items[0]}></Sidemenu>
+    <Sidemenu data={items}></Sidemenu>
     </>
   );
 }

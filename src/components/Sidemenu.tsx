@@ -3,16 +3,18 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
 import { List, ListItem, ListItemText } from '@material-ui/core';
+import { SidemenuItem } from '../models/SidemenuItem';
 
-interface Sidemenu {
-    items: []
-}
+export interface SidemenuProps {
+    data: SidemenuItem[];
+};
 
-const Sidemenu: FC<Sidemenu> = ({items}) => {
+const Sidemenu: FC<SidemenuProps> = ({data}) => {
+    // const children = data;
     return (
         <>
     <List disablePadding dense>
-    {items.map(({ name, children}) => (
+    {data.map(({ name, children}) => (
         <ListItem key={name}>
           <ListItemText>{name}</ListItemText>
         </ListItem>
