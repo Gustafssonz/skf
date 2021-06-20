@@ -15,9 +15,20 @@ const Sidemenu: FC<SidemenuProps> = ({data}) => {
         <>
     <List disablePadding dense>
     {data.map(({ name, children}) => (
-        <ListItem key={name}>
-          <ListItemText>{name}</ListItemText>
-        </ListItem>
+        <ListItem style={{ paddingLeft: 18 }} key={name} button >
+        <ListItemText>{name}</ListItemText>
+        {Array.isArray(children) ? (
+          <List disablePadding>
+            {children.map((child) => (
+              <ListItem key={child.name} button>
+                <ListItemText className="sidebar-item-text">
+                  {child.name}
+                </ListItemText>
+              </ListItem>
+            ))}
+          </List>
+        ) : null}
+      </ListItem>
       ))}
     </List>
     </>
