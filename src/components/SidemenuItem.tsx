@@ -56,8 +56,9 @@ const SidemenuItem: FC<ISidemenuItem> = ({
 				className={currentMain === name ? classes.active : ""}
 				button
 				dense
+				onClick={handleClick}
 			>
-				<ListItemText className={classes.text} onClick={handleClick}>
+				<ListItemText className={classes.text}>
 					{children &&
 						(isActive ? (
 							<ExpandMoreIcon className={classes.iconRotate} />
