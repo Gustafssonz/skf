@@ -1,61 +1,89 @@
-import React, { FC } from 'react'
-import { ListItem, ListItemText, List } from '@material-ui/core'
-import { ISidemenuItem } from '../models/ISidemenuItem'
-import { useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import { FC } from "react";
+import { ListItem, ListItemText, List } from "@material-ui/core";
+import { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-
 const useStyles = makeStyles({
-  active: {
-    borderLeft: '3px solid',
-  },
-  text: {
-    '& >span': {
-      display: 'flex',
-      alignItems: 'center',
-    }
-  },
+	active: {
+		borderRight: "3px solid",
+	},
+	text: {
+		"& >span": {
+			display: "flex",
+			alignItems: "center",
+		},
+	},
+	iconNormal: {
+		transform: "rotate(180deg)",
+		transition: "transform 0.3s",
+	},
+	iconRotate: {
+		transition: "transform 0.3s",
+	},
+	indent: {
+		paddingLeft: "1rem",
+	},
 });
 
-const SidemenuItem: FC<ISidemenuItem> = ({ name, children, setMainText, currentMain} : ISidemenuItem) => {
-  const [isActive, setisActive] = useState(true);
-  const classes = useStyles();
+export interface ISidemenuItem {
+  name: string;
+  children?: ISidemenuItem[];
+  setMainText?: Function;
+  active?: boolean;
+  currentMain?: string,
+}
 
-    const handleClick = () => {
-        setisActive(!isActive)
-        if(setMainText){
-          setMainText(name)
-        }
-    }
+const SidemenuItem: FC<ISidemenuItem> = ({
+	name,
+	children,
+	setMainText,
+	currentMain,
+}: ISidemenuItem) => {
+	const [isActive, setisActive] = useState(true);
+	const classes = useStyles();
 
-    return (
-      <>
-        <ListItem className={currentMain === name ? classes.active : ''} button dense >
-          <ListItemText className={classes.text} onClick={handleClick}>
-          { children ?  !isActive ? <ExpandLessIcon /> : <ExpandMoreIcon /> : null}
+	const handleClick = () => {
+		setisActive(!isActive);
+		if (setMainText) {
+			setMainText(name);
+		}
+	};
 
-          <span >{name}</span>
-          </ListItemText>
-        </ListItem>
+	return (
+		<>
+			<ListItem
+				className={currentMain === name ? classes.active : ""}
+				button
+				dense
+			>
+				<ListItemText className={classes.text} onClick={handleClick}>
+					{children &&
+						(isActive ? (
+							<ExpandMoreIcon className={classes.iconRotate} />
+						) : (
+							<ExpandMoreIcon className={classes.iconNormal} />
+						))}
+					<span>{name}</span>
+				</ListItemText>
+			</ListItem>
 
-        {Array.isArray(children) && !isActive ? (
-          <List disablePadding dense>
-            {children.map((child) => (
-              <SidemenuItem
-                key={child.name}
-                {...child}
-                setMainText={setMainText}
-                currentMain={currentMain}
-              />
-            ))}
-          </List>
-        ) : null}
-      </>
-    )
-  }
+			{Array.isArray(children) && !isActive ? (
+				<List disablePadding dense>
+					{children.map((child) => (
+						<div className={classes.indent}>
+							<SidemenuItem
+								key={child.name}
+								{...child}
+								setMainText={setMainText}
+								currentMain={currentMain}
+							/>
+						</div>
+					))}
+				</List>
+			) : null}
+		</>
+	);
+};
 
-
-export default SidemenuItem
-
+export default SidemenuItem;

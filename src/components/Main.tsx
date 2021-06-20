@@ -1,10 +1,9 @@
-
 import { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   root: {
-    flexGrow: 3,
+    width: '60%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -13,11 +12,11 @@ const useStyles = makeStyles({
 });
 
 type ItemProps = {
-    text: string
-  }
+  text: string
+}
 
-export const Main: FC<ItemProps> = ({text}) => {
-    const classes = useStyles();
+export const Main: FC<ItemProps> = ({ text }) => {
+  const classes = useStyles();
 
-    return <div className={classes.root}>{text}</div>;
+  return <div className={classes.root}>{text}</div>;
 };

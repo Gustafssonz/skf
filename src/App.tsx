@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
 import { useState } from 'react';
 import './App.css';
 import { Header } from './components/Header';
 import { Main } from './components/Main';
-import Sidemenu, { SidemenuProps } from './components/Sidemenu';
-import { ISidemenuItem } from './models/ISidemenuItem';
+import Sidemenu from './components/Sidemenu';
 import { makeStyles } from '@material-ui/core/styles';
+import { FC } from 'react';
 
 const useStyles = makeStyles({
    root: {
@@ -13,24 +12,25 @@ const useStyles = makeStyles({
       display: 'flex',
       flexDirection: 'column',
    },
-   body:{
+   body: {
       display: 'flex',
       height: '100%'
    }
- });
-function App() {
+});
+
+const App: FC = () => {
    const [mainText, setmainText] = useState("No response")
    const classes = useStyles();
 
-  return (
-  <div className={classes.root}>
-    <Header></Header>
-    <div className={classes.body}>
-      <Sidemenu  setMainText={setmainText} currentMain={mainText}></Sidemenu>
-      <Main text={mainText}></Main>
-    </div>
-    </div>
-  );
+   return (
+      <div className={classes.root}>
+         <Header></Header>
+         <div className={classes.body}>
+            <Sidemenu setMainText={setmainText} currentMain={mainText}></Sidemenu>
+            <Main text={mainText}></Main>
+         </div>
+      </div>
+   );
 }
 
 export default App;
