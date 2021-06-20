@@ -39,12 +39,13 @@ const Sidemenu: FC<ItemProps> = ({ setMainText, currentMain }) => {
 			<div className={classes.root}>
 				<List disablePadding dense>
 					{data.map((sidebarItem, index) => (
+						<div key={index}>
 						<SidemenuItem
-							key={`${sidebarItem.name}${index}`}
 							{...sidebarItem}
 							setMainText={setMainText}
 							currentMain={currentMain}
 						/>
+						</div>
 					))}
 				</List>
 			</div>

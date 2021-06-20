@@ -27,11 +27,11 @@ const useStyles = makeStyles({
 });
 
 export interface ISidemenuItem {
-  name: string;
-  children?: ISidemenuItem[];
-  setMainText?: Function;
-  active?: boolean;
-  currentMain?: string,
+	name: string;
+	children?: ISidemenuItem[];
+	setMainText?: Function;
+	active?: boolean;
+	currentMain?: string,
 }
 
 const SidemenuItem: FC<ISidemenuItem> = ({
@@ -70,10 +70,9 @@ const SidemenuItem: FC<ISidemenuItem> = ({
 
 			{Array.isArray(children) && !isActive ? (
 				<List disablePadding dense>
-					{children.map((child) => (
-						<div className={classes.indent}>
+					{children.map((child, index) => (
+						<div className={classes.indent} key={index}>
 							<SidemenuItem
-								key={child.name}
 								{...child}
 								setMainText={setMainText}
 								currentMain={currentMain}
