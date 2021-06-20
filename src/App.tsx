@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import './App.css';
+import { Header } from './components/Header';
 import Sidemenu, { SidemenuProps } from './components/Sidemenu';
-import { SidemenuItem } from './models/SidemenuItem';
+import { ISidemenuItem } from './models/ISidemenuItem';
 
 export const dataObjects = [
   {
@@ -58,11 +59,13 @@ function App() {
 
   // Här gör jag en fullösning, eftersom Rad 9 har en wrapper object "data" så vet jag inte
   // hur interfacet ska hantera strukturen.
-  const items: SidemenuItem[] = dataObjects[0].data;
+  const items: ISidemenuItem[] = dataObjects[0].data;
 
   return (
     <>
+    <Header props="Hello"></Header>
     <Sidemenu data={items}></Sidemenu>
+
     </>
   );
 }
